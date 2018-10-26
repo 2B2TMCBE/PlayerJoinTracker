@@ -27,6 +27,7 @@ public class main extends PluginBase {
     	if(command.getName().equalsIgnoreCase("lastjoin")) {
     		sender.sendMessage("playername not found.");
     		// TODO add in mechanism that trace the last join time of every players
+    		// this is a comment
     	}
         return false;
     }
