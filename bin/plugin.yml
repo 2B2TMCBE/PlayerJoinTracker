@@ -1,0 +1,17 @@
+# This plugin is made by maxxie114 for 2b2tmcpe
+# It is completely open sourced, feel free to modify it
+
+name: playerJoinTracker
+main: playerJoinTracker.main
+
+version: "3.0.0"
+api: ["1.0.7"]
+author: maxxie114
+
+commands:
+  lastjoin:
+    description: Tell players the last join time of a player
+    usage: "/lastjoin <playername>"
+
+
+
