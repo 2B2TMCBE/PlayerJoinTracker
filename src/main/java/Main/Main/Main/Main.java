@@ -59,16 +59,16 @@ public class Main extends PluginBase {
     return true;
   }
 
+  /**
+   * This function convert the Join time of a player into human readable format
+   * 
+   * @param Player target
+   * @return String format.toString()
+   */
   public String convertTime(Player target) {
     Date date = new Date(TimeUnit.SECONDS.toMillis(target.getLastPlayed()));
     Format format = new SimpleDateFormat("YYYY-MM-dd-HH:mm:ss");
     return format.format(date).toString();
-  }
-
-  /** just for test */
-  public String test(String input) {
-    return input;
-
   }
 
 }
