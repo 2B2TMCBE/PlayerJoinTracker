@@ -1,5 +1,6 @@
-package playerJoinTracker;
+package Events;
 
+import Main.Main.Main.Main;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
@@ -8,10 +9,10 @@ public class EventListener implements Listener {
 	
 	
     public String name;
-    public main m;
+    public Main main;
 	
-    public EventListener(main m) {
-    	this.m = m;
+    public EventListener(Main main) {
+    	this.main = main;
     }
     
 	@EventHandler
