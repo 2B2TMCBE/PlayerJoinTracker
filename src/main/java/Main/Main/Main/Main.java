@@ -40,10 +40,10 @@ public class Main extends PluginBase {
 
   @Override
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;
-    }
+    /*
+     * if (!(sender instanceof Player)) { sender.sendMessage("Only Players Can Use This Command.");
+     * return true; }
+     */
     // Player p = (Player) sender;
     Player target = this.getServer().getPlayer(args[0]);
     if (cmd.getName().equalsIgnoreCase("lastjoin")) {
