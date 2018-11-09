@@ -1,9 +1,9 @@
-# This plugin is made by maxxie114 for 2b2tmcpe
+# This plugin is made by maxxie114 and Andrew121410 for 2b2tmcpe
 # It is completely open sourced, feel free to modify it
 name: playerJoinTracker
 main: main.java.Main.Main.Main.Main
 version: "1.0.0"
-api: ["1.0.5"]
+api: ["1.0.7"]
 author: maxxie114
 authors: ["maxxie114", "Andrew121410"]
 description: nothing

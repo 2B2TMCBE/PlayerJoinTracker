@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import cn.nukkit.IPlayer;
-import cn.nukkit.Player;
 // import from Nukkitx
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
@@ -42,21 +41,29 @@ public class Main extends PluginBase {
 
   @Override
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-  /*  if (!(sender instanceof Player)) {
-      sender.sendMessage("Only Players Can Use This Command.");
-      return true;*/
-    Player p = (Player) sender;
-    IPlayer target = this.getServer().getOfflinePlayer(args[0]);
-
-    if (cmd.getName().equalsIgnoreCase("lastjoin")) {
-      if (args.length == 1) {
-        if (!target.hasPlayedBefore()) {
-          p.sendMessage(TextFormat.RED + "Player doesn't exist, please try again.");
+    /*
+     * if (!(sender instanceof Player)) { sender.sendMessage("Only Players Can Use This Command.");
+     * return true;
+     */
+    // Player p = (Player) sender;
+    IPlayer target = null;
+    try {
+      // use try catch to fix NullPointerException
+      if (cmd.getName().equalsIgnoreCase("lastjoin")) {
+        if (args.length == 1 && args[0] != null) {
+          target = this.getServer().getOfflinePlayer(args[0]);
+          if (target == null) {
+            sender.sendMessage(TextFormat.RED + "Player doesn't exist, please try again.");
+          } else {
+            sender.sendMessage(TextFormat.BLUE + "Player, " + args[0] + " " + "last joined in "
+                + convertTime(target));
+          }
         } else {
-          p.sendMessage(TextFormat.BLUE + "Player, " + args[0] + " " + "last joined in "
-              + convertTime(target));
+          sender.sendMessage("Command usage: /lastjoin <PlayerName>");
         }
       }
+    } catch (NullPointerException e) {
+      sender.sendMessage("Player doesn't exist, please try again.");
     }
     return true;
   }
@@ -70,7 +77,8 @@ public class Main extends PluginBase {
   public String convertTime(IPlayer target) {
     Date date = new Date(TimeUnit.SECONDS.toMillis(target.getLastPlayed()));
     Format format = new SimpleDateFormat("YYYY-MM-dd-HH:mm:ss");
-    return format.format(date).toString();
+    String result = format.format(date).toString();
+    return result;
   }
 
 }
