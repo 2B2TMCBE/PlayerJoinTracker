@@ -4,6 +4,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import cn.nukkit.IPlayer;
 import cn.nukkit.Player;
 // import from Nukkitx
 import cn.nukkit.command.Command;
@@ -38,22 +39,23 @@ public class Main extends PluginBase {
    * EventListener(this), this); }
    */
 
+
   @Override
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    /*
-     * if (!(sender instanceof Player)) { sender.sendMessage("Only Players Can Use This Command.");
-     * return true; }
-     */
-    // Player p = (Player) sender;
-    Player target = this.getServer().getPlayer(args[0]);
+  /*  if (!(sender instanceof Player)) {
+      sender.sendMessage("Only Players Can Use This Command.");
+      return true;*/
+    Player p = (Player) sender;
+    IPlayer target = this.getServer().getOfflinePlayer(args[0]);
+
     if (cmd.getName().equalsIgnoreCase("lastjoin")) {
-      if (args.length == 1 && target != null) {
-        sender.sendMessage(
-            TextFormat.BLUE + "Player, " + args[0] + " " + "last joined in " + convertTime(target));
-        return true;
-      } else {
-        sender.sendMessage(TextFormat.RED + "Player doesn't exist, please try again.");
-        return true;
+      if (args.length == 1) {
+        if (!target.hasPlayedBefore()) {
+          p.sendMessage(TextFormat.RED + "Player doesn't exist, please try again.");
+        } else {
+          p.sendMessage(TextFormat.BLUE + "Player, " + args[0] + " " + "last joined in "
+              + convertTime(target));
+        }
       }
     }
     return true;
@@ -65,7 +67,7 @@ public class Main extends PluginBase {
    * @param Player target
    * @return String format.toString()
    */
-  public String convertTime(Player target) {
+  public String convertTime(IPlayer target) {
     Date date = new Date(TimeUnit.SECONDS.toMillis(target.getLastPlayed()));
     Format format = new SimpleDateFormat("YYYY-MM-dd-HH:mm:ss");
     return format.format(date).toString();
