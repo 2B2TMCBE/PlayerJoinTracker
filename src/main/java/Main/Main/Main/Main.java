@@ -76,7 +76,7 @@ public class Main extends PluginBase {
    */
   public String convertTime(IPlayer target) {
     Date date = new Date(TimeUnit.SECONDS.toMillis(target.getLastPlayed()));
-    Format format = new SimpleDateFormat("MM-dd-YYYY-HH:mm:ss");
+    Format format = new SimpleDateFormat("MM-dd-YYYY-HH:mm:ss z");
     String result = format.format(date).toString();
     return result;
   }
