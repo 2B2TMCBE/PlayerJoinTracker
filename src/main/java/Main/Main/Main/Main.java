@@ -16,6 +16,7 @@ public class Main extends PluginBase {
   // create private variables
   // @SuppressWarnings("unused")
   // private EventListener listener;
+  // private Command command
 
   @Override
   public void onLoad() {
@@ -75,8 +76,9 @@ public class Main extends PluginBase {
    * @return String format.toString()
    */
   public String convertTime(IPlayer target) {
-    Date date = new Date(TimeUnit.SECONDS.toMillis(target.getLastPlayed()));
+    // The code to set the time format
     Format format = new SimpleDateFormat("MM-dd-YYYY-HH:mm:ss z");
+    Date date = new Date(TimeUnit.SECONDS.toMillis(target.getLastPlayed()));
     String result = format.format(date).toString();
     return result;
   }
