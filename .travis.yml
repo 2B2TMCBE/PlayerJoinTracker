@@ -1,2 +1,14 @@
 language: java
 script: mvn clean package
+before_deploy:
+- git config --local user.name "maxxie114"
+- git config --local user.email "maxxie114@gmail.com"
+- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%m%d%Y-%H.%M.%S')-$(git log --format=%h -1)}
+- git tag $TRAVIS_TAG
+deploy:
+  provider: releases
+  api_key:
+    secure: cqZeBXLXv5k71FumI9VWEebEg5xFsAV0CEY16lP+EgfhNZu7b7CLbX5Z4D02ZzVHVgeUfC7ul4d8rIvQ4dT2jm4e80NhCxKLw9WH5WpJzvCey9QXcIfSaqqW4FuR+tbMwteIQwbTu4cDtLRmxoSssXdLu7ydEpUb4v2zRgbxRUFXePaW9uZaV1U9AG16iAWk/jwMmiR+E7PScMzfjzm5NXkFlBoYzayXVTEem/OU106KVtByvG0BkE9vNZWRMtFdlo3zPzBupPzQGua5AdPktdNTXd5FxXct4Oljo1wWdOcKwEs8VEALehZeK8WXL7YIf/5IptfTqkc7ZJGaMQJHitP97e5o4upjhhJ78zEtY3iksNVBBC4yIFlcuHPuvy0L4M8lLKcYL9d0uKvVnuO7Du2ZXgU7359Df87CDXqNI+fAW7WIqj+Q9wcEjMb3aoCo5xUhZ33yaSdrlM5UWP4ZZCcvY7svCwLob2hDzmSmIVcmE26k2WXgVoA60I4+cyZaGkgao4LzLCU62Yc6PHdQ8UhyI7Xc7u/OowQxPY0kVrN3WSKfatNg74bOUhKsOioBzoSLgkdVCuiVlgUsRmyne9P8eFuJ+jMYCNyF0+tyFdkgMka+XiVMr6De1o6deE9I7ZTEHREKSdwS3aExf5KFDqHUSV2RAXT6izCJb2NMvig=
+  file: /home/travis/build/2B2TMCBE/playerJoinTracker/target/playerJoinTracker-1.0.0-SNAPSHOT.jar
+  skip_cleanup: true
+  overwrite: true
